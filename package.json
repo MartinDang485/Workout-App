@@ -1,0 +1,17 @@
+{
+  "name": "workout-app",
+  "version": "1.0.0",
+  "description": "A workout app where users can make and customize their workouts using an account.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.3"
+  }
+}
