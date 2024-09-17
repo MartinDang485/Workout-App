@@ -11,8 +11,11 @@ app.use(express.json()); //For every req, if has data, attached to req object
 
 //Every time a route is fired
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*")
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    //Cors configurations to allow cross origin requests
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173')
+    res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE')
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+
     console.log(req.method, res.method)
     next();
 })
@@ -20,7 +23,10 @@ app.use((req, res, next) => {
 //Uses these routes
 app.use('/api/workouts', mainRoutes) 
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'PUT', 'POST', 'DELETE']
+}));
 
 //Connect to database
 mongoose.connect(process.env.MONGO_URI)

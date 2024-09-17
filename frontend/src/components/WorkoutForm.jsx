@@ -1,6 +1,9 @@
 import { useState } from 'react'
+import { useWorkoutsContext } from '../hooks/useWorkoutsContext'
 
 const WorkoutForm = () => {
+    const { dispatch } = useWorkoutsContext()
+
     const [title, setTitle] = useState('')
     const [reps, setReps] = useState('')
     const [weight, setWeight] = useState('')
@@ -35,8 +38,13 @@ const WorkoutForm = () => {
             setWeight('')
             setSet('')
             console.log('New Workout Added', json)
+            dispatch({type: 'CREATE_WORKOUT', payload: json})
         }
 
+    }
+
+    const refreshPage = () => {
+        window.location.refresh(false)
     }
 
     return (
@@ -71,8 +79,8 @@ const WorkoutForm = () => {
                 value={sets}
             />
 
-            <button>Add Workout</button>
-
+            <button onClick={refreshPage}>Add Workout</button>
+            {error && <div className="error">{error}</div>}
         </form>
     )
 }

@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react'
 import WorkoutForm from '../components/WorkoutForm'
+import WorkoutDetails from '../components/WorkoutDetails'
+import { useWorkoutsContext } from '../hooks/useWorkoutsContext'
+
+
 const Home = () => {
-    const [workouts, setWorkouts] = useState(null)
+    const { workouts, dispatch } = useWorkoutsContext()
 
     //Use effect to detch all workouts
     useEffect(() => {
@@ -10,7 +14,7 @@ const Home = () => {
             const json = await response.json()
 
             if(response.ok) {
-                setWorkouts(json)
+                dispatch({type: 'SET_WORKOUTS', payload: json})
             }
         }
         fetchAllWorkouts()
@@ -22,7 +26,7 @@ const Home = () => {
             <div className="workouts">
                 <h3>Lifts</h3>
                 {workouts && workouts.map((workout) => (
-                    <p key={workout._id}>{workout.title}</p>
+                    <WorkoutDetails key={workout._id} workout={workout}/>
                 ))}
             </div>
             <WorkoutForm />
