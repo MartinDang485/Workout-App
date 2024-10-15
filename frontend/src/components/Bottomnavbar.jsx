@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Bottom = () => {
     return (
-        <h3>For more information, visit: </h3>
+        <h3> </h3>
     )
 }
 

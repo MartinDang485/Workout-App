@@ -13,17 +13,17 @@ const Navbar = () => {
         <header>
             <div className="Container">
                 <Link to="/">
-                    <h3>Workout App</h3>
+                    <h2>Workout App</h2>
                 </Link>
                 <nav>
                     {user && (
-                        <div>
+                        <div className="navbar">
                             <span>{user.email}</span>
                             <button onClick={handleClick}>Logout</button>
                         </div>
                     )}
                     {!user && (
-                        <div>
+                        <div className="navbar">
                             <Link to="/login">Login</Link>
                             <Link to="/signup">Signup</Link>
                         </div>

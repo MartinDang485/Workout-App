@@ -7,7 +7,12 @@ const {
     deleteWorkout
 } = require('../controllers/appController')
 
+const requireAuth = require('../middleware/requireAuth')
+
 const router = express.Router(); //Instance of express router
+
+//Middleware fires before routes, to protect api routes
+router.use(requireAuth)
 
 //Each router has a controller attached to it
 //Home

@@ -3,9 +3,10 @@ const workoutmodel = require('../appModel/workoutModel')
 
 //Home
 const getAll = async (req, res) => {
-    const workouts = await workoutmodel.find({}).sort({createdAt: -1})
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(workouts);
+    const user_id = req.user._id
+    const workouts = await workoutmodel.find({ user_id }).sort({createdAt: -1})
+    res.setHeader('Content-Type', 'application/json')
+    res.status(200).json(workouts)
 }
 //Get a single workout
 const getOne = async (req, res) => {
@@ -47,7 +48,8 @@ const addWorkout = async (req, res) => {
     }
 
     try { //Try to create a new workout form
-        const workout = await workoutmodel.create({title, reps, weight, sets})
+        const user_id = req.user._id
+        const workout = await workoutmodel.create({title, reps, weight, sets, user_id})
         res.status(200).json(workout);
     } catch (error) { //If not, send error 
         res.status(400).json({error: error.message})
@@ -57,7 +59,7 @@ const addWorkout = async (req, res) => {
 //Delete 
 
 const deleteWorkout = async (req, res) => {
-    const {id} = req.params(id)
+    const {id} = req.params
 
     if(!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'No such error found'})
