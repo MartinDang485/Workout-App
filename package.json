@@ -4,6 +4,8 @@
   "description": "A workout app where users can make and customize their workouts using an account.",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
+    "build": "npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
